@@ -1,6 +1,7 @@
 package response
 
 import (
+	"go-ecommerce-backend-api/pkg/i18n"
 	"net/http"
 	"time"
 
@@ -27,6 +28,14 @@ var standardMessages = map[int]string{
 	CodeNotFound:           "Not found",
 	CodeInternalError:      "Internal server error",
 	CodeServiceUnavailable: "Service unavailable",
+}
+
+func getTranslatedMessage(c *gin.Context, messageCode string) string {
+	lang := c.GetHeader("Accept-Language")
+	if lang == "" {
+		lang = "vi" // Default to Vietnamese
+	}
+	return i18n.Translate(lang, messageCode, nil)
 }
 
 // Response represents a standard API response structure
@@ -123,16 +132,21 @@ func PaginatedWithMessage(c *gin.Context, message string, data interface{}, page
 }
 
 // BadRequest sends a bad request error response
-func BadRequest(c *gin.Context, message string) {
-	c.JSON(http.StatusBadRequest, NewResponse(CodeBadRequest, message, nil))
+func BadRequest(c *gin.Context, messageCode string) {
+	response := NewResponse(CodeBadRequest, messageCode, nil)
+	response.Message = getTranslatedMessage(c, messageCode)
+	c.JSON(http.StatusBadRequest, response)
 }
 
 // Unauthorized sends an unauthorized error response
-func Unauthorized(c *gin.Context, message string) {
-	if message == "" {
-		message = standardMessages[CodeUnauthorized]
+// Unauthorized sends an unauthorized error response
+func Unauthorized(c *gin.Context, messageCode string) {
+	if messageCode == "" {
+		messageCode = "unauthorized"
 	}
-	c.JSON(http.StatusUnauthorized, NewResponse(CodeUnauthorized, message, nil))
+	response := NewResponse(CodeUnauthorized, messageCode, nil)
+	response.Message = getTranslatedMessage(c, messageCode)
+	c.JSON(http.StatusUnauthorized, response)
 }
 
 // Forbidden sends a forbidden error response

@@ -72,7 +72,7 @@ func (s *productService) GetProductByID(id int64) (*model.Product, error) {
 	product, err := s.productRepo.GetByID(id)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return nil, errors.New("product not found")
+			return nil, errors.New("not_found")
 		}
 		return nil, err
 	}
