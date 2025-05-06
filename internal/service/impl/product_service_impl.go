@@ -2,8 +2,11 @@ package impl
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
+	"time"
+
 	"go-ecommerce-backend-api/global"
 	"go-ecommerce-backend-api/internal/common"
 	"go-ecommerce-backend-api/internal/model"
@@ -51,6 +54,21 @@ func (s *productService) CreateProduct(req *request.CreateProductRequest) (*mode
 
 // GetProductByID retrieves a product by ID
 func (s *productService) GetProductByID(id int64) (*model.Product, error) {
+	cacheKey := fmt.Sprintf("product:%d", id)
+	ctx := context.Background()
+
+	// Try to get the product from Redis cache
+	cachedProduct, err := global.Rdb.Get(ctx, cacheKey).Result()
+	if err == nil {
+		// Product found in cache, unmarshal and return
+		var product model.Product
+		err = json.Unmarshal([]byte(cachedProduct), &product)
+		if err == nil {
+			return &product, nil
+		}
+	}
+
+	// If not in cache or error occurred, fetch from repository
 	product, err := s.productRepo.GetByID(id)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
@@ -58,6 +76,13 @@ func (s *productService) GetProductByID(id int64) (*model.Product, error) {
 		}
 		return nil, err
 	}
+
+	// Cache the product in Redis
+	productJSON, err := json.Marshal(product)
+	if err == nil {
+		global.Rdb.Set(ctx, cacheKey, productJSON, 1*time.Hour) // Cache for 1 hour
+	}
+
 	return product, nil
 }
 
@@ -105,6 +130,10 @@ func (s *productService) UpdateProduct(id int64, req *request.UpdateProductReque
 	if err != nil {
 		return nil, err
 	}
+
+	// Invalidate cache
+	cacheKey := fmt.Sprintf("product:%d", product.ID)
+	global.Rdb.Del(context.Background(), cacheKey)
 
 	return product, nil
 }
