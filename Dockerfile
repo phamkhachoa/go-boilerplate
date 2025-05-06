@@ -1,17 +1,19 @@
 FROM golang:alpine AS builder
 
-WORKDIR /build
+WORKDIR /app
 
 COPY . .
 
 RUN go mod download
 
-RUN go build -o crm.shopdev.com ./cmd/server
+RUN go build -o main ./cmd/server/
 
 FROM scratch
 
+WORKDIR /
+COPY --from=builder /app/main .
+
 COPY ./config /config
+COPY ./.env .
 
-COPY --from=builder /build/crm.shopdev.com /
-
-ENTRYPOINT ["/crm.shopdev.com", "config/local.yaml"]
+ENTRYPOINT ["/main"]

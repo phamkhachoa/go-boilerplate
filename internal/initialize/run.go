@@ -8,7 +8,7 @@ import (
 
 func Run() *gin.Engine {
 	// LoadConfig
-	LoadConfig()
+	LoadConfig("./config/config.yaml", "./.env")
 	fmt.Println("Loading configuration mysql", global.Config.Mysql.Username)
 	InitLogger()
 	InitMysql()

@@ -3,7 +3,9 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"go-ecommerce-backend-api/global"
 	"go-ecommerce-backend-api/internal/initialize"
+	"strconv"
 )
 import "github.com/swaggo/gin-swagger" // gin-swagger middleware
 import "github.com/swaggo/files"       // swagger embed files
@@ -31,5 +33,5 @@ func main() {
 	r := initialize.Run()
 	r.GET("/metrics", gin.WrapH(promhttp.Handler()))
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	r.Run(":8002")
+	r.Run(":" + strconv.Itoa(global.Config.Server.Port))
 }

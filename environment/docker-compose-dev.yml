@@ -74,19 +74,19 @@ services:
     ports:
       - "3002:3000"
     networks:
-      - pre-go-local-networks    
+      - pre-go-local-networks
 
-#  crm.shopdev.com:
-#    container_name: go_backend_crm_shopdev
-##    build:
-##      context: .
-##      dockerfile: Dockerfile
-#    image: go_backend_crm_shopdev
-#    restart: always
-#    depends_on:
-#      - mysql
-#      - redis
-#    ports:
-#      - "8002:8002"
-#    networks:
-#      - pre-go-local-networks
+  shopdevgo:
+    container_name: shopdevgo
+#    build:
+#      context: .
+#      dockerfile: ../Dockerfile
+    image: shopdevgo
+    restart: always
+    depends_on:
+      - mysql
+      - redis
+    ports:
+      - "8080:8080"
+    networks:
+      - pre-go-local-networks
