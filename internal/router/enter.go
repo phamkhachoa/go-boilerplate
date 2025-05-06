@@ -1,13 +1,9 @@
 package router
 
-import (
-	rauth "go-ecommerce-backend-api/internal/router/auth"
-	"go-ecommerce-backend-api/internal/router/user"
-)
+import "go-ecommerce-backend-api/internal/router/product"
 
 type RouterGroup struct {
-	User user.UserRouterGroup
-	Auth rauth.AuthRouterGroup
+	Product product.ProductRouterGroup
 }
 
 var RouterGroupApp = new(RouterGroup)
