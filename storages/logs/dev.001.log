@@ -1,0 +1,18 @@
+{"level":"INFO","time":"2025-05-01T22:17:46.571+0700","caller":"initialize/mysql.go:30","msg":"Init mysql success"}
+{"level":"INFO","time":"2025-05-01T22:17:46.574+0700","caller":"initialize/redis.go:27","msg":"Redis initialization success"}
+{"level":"INFO","time":"2025-05-01T22:21:28.764+0700","caller":"initialize/mysql.go:30","msg":"Init mysql success"}
+{"level":"INFO","time":"2025-05-01T22:21:28.766+0700","caller":"initialize/redis.go:27","msg":"Redis initialization success"}
+{"level":"INFO","time":"2025-05-01T22:24:24.496+0700","caller":"middlewares/auth.middleware.go:16","msg":"uri","uri":"/v1/2024/user/search"}
+{"level":"INFO","time":"2025-05-01T22:26:13.722+0700","caller":"middlewares/auth.middleware.go:16","msg":"uri","uri":"/v1/2024/user/register"}
+{"level":"INFO","time":"2025-05-01T22:26:20.484+0700","caller":"controller/auth.controller.go:26","msg":"Body :","body":{"user_account":"phamkhachoabk1@gmail.com","user_password":"123456aA@"}}
+{"level":"INFO","time":"2025-05-01T22:27:06.366+0700","caller":"initialize/mysql.go:30","msg":"Init mysql success"}
+{"level":"INFO","time":"2025-05-01T22:27:06.369+0700","caller":"initialize/redis.go:27","msg":"Redis initialization success"}
+{"level":"INFO","time":"2025-05-01T22:28:01.575+0700","caller":"initialize/mysql.go:30","msg":"Init mysql success"}
+{"level":"INFO","time":"2025-05-01T22:28:01.577+0700","caller":"initialize/redis.go:27","msg":"Redis initialization success"}
+{"level":"INFO","time":"2025-05-01T22:28:05.774+0700","caller":"controller/user.controller.go:50","msg":"Params :","params":{"email":"phamkhachoabk1@gmail.com","purpose":"adminuser","phone":"0987564756","password":"123456aA@"}}
+{"level":"INFO","time":"2025-05-01T22:28:09.228+0700","caller":"controller/auth.controller.go:26","msg":"Body :","body":{"user_account":"phamkhachoabk1@gmail.com","user_password":"123456aA@"}}
+{"level":"INFO","time":"2025-05-01T22:28:16.677+0700","caller":"middlewares/auth.middleware.go:16","msg":"uri","uri":"/v1/2024/user/search"}
+{"level":"INFO","time":"2025-05-01T22:30:12.175+0700","caller":"middlewares/auth.middleware.go:16","msg":"uri","uri":"/v1/2024/user/search"}
+{"level":"INFO","time":"2025-05-01T22:30:12.556+0700","caller":"middlewares/auth.middleware.go:16","msg":"uri","uri":"/v1/2024/user/search"}
+{"level":"INFO","time":"2025-05-01T22:30:12.946+0700","caller":"middlewares/auth.middleware.go:16","msg":"uri","uri":"/v1/2024/user/search"}
+{"level":"INFO","time":"2025-05-01T22:30:14.473+0700","caller":"middlewares/auth.middleware.go:16","msg":"uri","uri":"/v1/2024/user/search"}
