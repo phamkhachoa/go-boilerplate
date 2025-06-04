@@ -8,25 +8,15 @@ package wire
 
 import (
 	"go-ecommerce-backend-api/internal/controller"
-	"go-ecommerce-backend-api/internal/repo"
-	"go-ecommerce-backend-api/internal/service/impl"
+	"go-ecommerce-backend-api/internal/repo/impl"
+	impl2 "go-ecommerce-backend-api/internal/service/impl"
 )
 
-// Injectors from auth.wire.go:
+// Injectors from product.wire.go:
 
-func InitAuthRouterHandler() (*controller.AuthController, error) {
-	iUserRepository := repo.NewUserRepository()
-	iAuthService := impl.NewAuthService(iUserRepository)
-	authController := controller.NewAuthController(iAuthService)
-	return authController, nil
-}
-
-// Injectors from user.wire.go:
-
-func InitUserRouterHandler() (*controller.UserController, error) {
-	iUserRepository := repo.NewUserRepository()
-	iUserAuthRepository := repo.NewUserAuthRepository()
-	iUserInfo := impl.NewUserService(iUserRepository, iUserAuthRepository)
-	userController := controller.NewUserController(iUserInfo)
-	return userController, nil
+func InitProductRouterHandler() (*controller.ProductController, error) {
+	productRepo := impl.NewProductRepo()
+	iProductService := impl2.NewProductService(productRepo)
+	productController := controller.NewProductController(iProductService)
+	return productController, nil
 }

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"go-ecommerce-backend-api/global"
+	"go-ecommerce-backend-api/pkg/i18n"
 )
 
 func Run() *gin.Engine {
@@ -13,6 +14,7 @@ func Run() *gin.Engine {
 	InitLogger()
 	InitMysql()
 	InitRedis()
+	i18n.Init()
 
 	r := InitRouter()
 	return r

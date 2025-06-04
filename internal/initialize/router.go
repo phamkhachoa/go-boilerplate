@@ -1,9 +1,10 @@
 package initialize
 
 import (
-	"github.com/gin-gonic/gin"
 	"go-ecommerce-backend-api/global"
 	"go-ecommerce-backend-api/internal/router"
+
+	"github.com/gin-gonic/gin"
 )
 
 func InitRouter() *gin.Engine {
@@ -23,16 +24,14 @@ func InitRouter() *gin.Engine {
 	//r.Use() // logging
 	//r.Use() // cross
 	//r.Use() // limiter
-	userRouter := router.RouterGroupApp.User
-	authRouter := router.RouterGroupApp.Auth
+	productRouter := router.RouterGroupApp.Product
 
 	MainGroup := r.Group("/v1/2024")
 	{
 		MainGroup.GET("/check-status")
 	}
 	{
-		userRouter.InitUserRouter(MainGroup)
-		authRouter.InitAuthRouter(MainGroup)
+		productRouter.InitRouter(MainGroup)
 	}
 	return r
 }
