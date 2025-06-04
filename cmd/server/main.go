@@ -32,7 +32,7 @@ import "github.com/swaggo/files"       // swagger embed files
 // @externalDocs.url          https://swagger.io/resources/open-api/
 func main() {
 	r := initialize.Run()
-	fmt.Print("feature1")
+	fmt.Print("feature1-1")
 	r.GET("/metrics", gin.WrapH(promhttp.Handler()))
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	r.Run(":" + strconv.Itoa(global.Config.Server.Port))
