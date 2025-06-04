@@ -33,6 +33,7 @@ import "github.com/swaggo/files"       // swagger embed files
 func main() {
 	r := initialize.Run()
 	fmt.Print("feature1")
+	fmt.Print("feature2")
 	r.GET("/metrics", gin.WrapH(promhttp.Handler()))
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	r.Run(":" + strconv.Itoa(global.Config.Server.Port))
